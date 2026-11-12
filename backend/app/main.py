@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 
-from app.routers import auth, users, categories, transactions,budgets, savings_goals, savings_contributions
+from app.routers import auth, users, categories, transactions,budgets, savings_goals, savings_contributions,dashboard
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -30,6 +30,7 @@ app.include_router(transactions.router)
 app.include_router(budgets.router)
 app.include_router(savings_goals.router)
 app.include_router(savings_contributions.router)
+app.include_router(dashboard.router)
 
 
 @app.get("/")
