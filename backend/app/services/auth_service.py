@@ -22,6 +22,10 @@ from app.repositories import refresh_token_repository
 
 from app.models.user import User
 
+from app.services.default_category_service import (
+    create_default_categories
+)
+
 
 class UserAlreadyExistsError(Exception):
     pass
@@ -67,6 +71,9 @@ def register_user(db: Session,name: str,email: str,password: str) -> User:
             password_hash=hashed_password
         )
 
+        # Create default categories for the new user.
+        create_default_categories(db,user.id)
+
         db.commit()
         db.refresh(user)
 
@@ -76,10 +83,10 @@ def register_user(db: Session,name: str,email: str,password: str) -> User:
 
         db.rollback()
 
-        raise UserAlreadyExistsError(
-            "An account with this email already exists"
-        )
+        raise UserAlreadyExistsError("An account with this email already exists")
 
+
+        
 
 def authenticate_user(db: Session,email: str,password: str) -> tuple[str, str, User]:
 
