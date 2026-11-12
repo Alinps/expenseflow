@@ -4,3 +4,4 @@ from app.models.transaction import Transaction
 from app.models.budget import Budget
 from app.models.savings_goal import SavingsGoal
 from app.models.refresh_token import RefreshToken
+from app.models.savings_contribution import SavingsContribution

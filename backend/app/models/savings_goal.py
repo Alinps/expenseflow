@@ -15,6 +15,8 @@ from app.database.base import BaseModel
 
 import uuid
 
+from sqlalchemy.orm import relationship
+
 
 class SavingsGoal(BaseModel):
 
@@ -63,4 +65,10 @@ class SavingsGoal(BaseModel):
     user = relationship(
         "User",
         back_populates="savings_goals"
+    )
+    contributions = relationship(
+        "SavingsContribution",
+        back_populates="goal",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
     )
