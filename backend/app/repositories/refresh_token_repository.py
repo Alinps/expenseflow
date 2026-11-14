@@ -10,7 +10,10 @@ from app.models.refresh_token import RefreshToken
 from sqlalchemy import select
 
 
-def create_refresh_token(db: Session,user_id: uuid.UUID,token_hash: str,expires_at: datetime) -> RefreshToken:
+def create_refresh_token(
+    db: Session,user_id: uuid.UUID,
+    token_hash: str,
+    expires_at: datetime) -> RefreshToken:
 
     refresh_token = RefreshToken(user_id=user_id,token_hash=token_hash,expires_at=expires_at)
 
