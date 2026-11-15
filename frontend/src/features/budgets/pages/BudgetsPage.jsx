@@ -7,6 +7,8 @@ import BudgetCard from "../components/BudgetCard";
 import BudgetModal from "../components/BudgetModal";
 import DeleteBudgetDialog from "../components/DeleteBudgetDialog";
 
+import CardGridSkeleton from "../../../components/common/LoadingStates/CardGridSkeleton";
+
 import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Budgets.module.css";
@@ -285,9 +287,7 @@ function BudgetsPage() {
       </div>
 
       {loading ? (
-        <div className={styles.empty}>
-          Loading budgets...
-        </div>
+         <CardGridSkeleton count={3} />
       ) : budgets.length === 0 ? (
         <div className={styles.empty}>
           <h3>No budgets for this month</h3>

@@ -12,6 +12,8 @@ import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Savings.module.css";
 
+import CardGridSkeleton from "../../../components/common/LoadingStates/CardGridSkeleton";
+
 function SavingsPage() {
   const [goals, setGoals] = useState([]);
 
@@ -258,9 +260,7 @@ function SavingsPage() {
       </div>
 
       {loading ? (
-        <div className={styles.empty}>
-          Loading savings goals...
-        </div>
+         <CardGridSkeleton count={3} />
       ) : goals.length === 0 ? (
         <div className={styles.empty}>
           <h3>No savings goals yet</h3>

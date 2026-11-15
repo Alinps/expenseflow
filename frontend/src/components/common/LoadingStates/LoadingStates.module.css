@@ -1,0 +1,132 @@
+.tableWrapper {
+    width: 100%;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.tableHeader,
+.tableRow {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    align-items: center;
+    padding: 18px 20px;
+}
+
+.tableHeader {
+    background: var(--color-background);
+    border-bottom: 1px solid var(--border);
+}
+
+.tableRow {
+    border-bottom: 1px solid var(--border);
+}
+
+.tableRow:last-child {
+    border-bottom: none;
+}
+
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.cardSkeleton,
+.summaryCard,
+.chartCard {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboardSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.dashboardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboardHeader > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.chartGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.recentSection {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.recentRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.recentRow:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 900px) {
+    .summaryGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .chartGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .cardGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .summaryGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tableHeader,
+    .tableRow {
+        gap: 10px;
+        padding: 14px 10px;
+    }
+
+    .dashboardHeader {
+        align-items: flex-start;
+    }
+}

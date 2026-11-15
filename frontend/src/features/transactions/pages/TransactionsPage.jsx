@@ -8,6 +8,8 @@ import TransactionModal from "../components/TransactionModal";
 import DeleteTransactionDialog from "../components/DeleteTransactionDialog";
 import { useToast } from "../../../hooks/useToast";
 
+import TableSkeleton from "../../../components/common/LoadingStates/TableSkeleton";
+
 import styles from "../styles/Transactions.module.css";
 
 const PAGE_SIZE = 10;
@@ -256,9 +258,8 @@ function TransactionsPage() {
       )}
 
       {loading ? (
-        <div className={styles.message}>
-          Loading transactions...
-        </div>
+       <TableSkeleton rows={5} columns={6} />
+        
       ) : (
         <>
           <TransactionTable

@@ -12,6 +12,8 @@ import RecentTransactions from "../components/RecentTransactions";
 import BudgetOverview from "../components/BudgetOverview";
 import SavingsOverview from "../components/SavingsOverview";
 
+import DashboardSkeleton from "../../../components/common/LoadingStates/DashboardSkeleton";
+
 
 import {
     formatCurrency,
@@ -160,11 +162,7 @@ function DashboardPage() {
     }, []);
 
     if (loading) {
-        return (
-            <div className={styles.stateMessage}>
-                Loading your financial dashboard...
-            </div>
-        );
+        return <DashboardSkeleton />;
     }
 
     if (error) {

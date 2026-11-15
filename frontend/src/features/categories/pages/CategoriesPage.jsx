@@ -10,6 +10,8 @@ import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Categories.module.css";
 
+import TableSkeleton from "../../../components/common/LoadingStates/TableSkeleton";
+
 function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [filterType, setFilterType] = useState("");
@@ -193,9 +195,7 @@ function CategoriesPage() {
       )}
 
       {loading ? (
-        <div className={styles.empty}>
-          Loading categories...
-        </div>
+        <TableSkeleton rows={5} columns={4} />
       ) : (
         <CategoryTable
           categories={categories}

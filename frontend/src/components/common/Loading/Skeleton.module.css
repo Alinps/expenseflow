@@ -1,0 +1,40 @@
+.skeleton {
+    display: block;
+    background: linear-gradient(
+        90deg,
+        #e9edf3 25%,
+        #f5f7fa 50%,
+        #e9edf3 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.text {
+    border-radius: 6px;
+}
+
+.circular {
+    border-radius: 50%;
+}
+
+.rectangular {
+    border-radius: 10px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+        background: #e9edf3;
+    }
+}
