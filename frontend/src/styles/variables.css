@@ -1,8 +1,22 @@
 :root {
     /* Brand colors */
-    --color-primarycolor: #6366f1;
+    --color-primary: #6366f1;
     --color-primary-hover: #4f46e5;
     --color-primary-light: #eef2ff;
+
+
+     /* Compatibility aliases */
+    --primary: var(--color-primary);
+    --primary-hover: var(--color-primary-hover);
+    --primary-light: var(--color-primary-light);
+
+    --background: var(--color-background);
+    --surface: var(--color-surface);
+
+    /* Other commonly used variables */
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
 
     /* Background colors */
     --color-background: #f8fafc;

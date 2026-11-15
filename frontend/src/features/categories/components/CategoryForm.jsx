@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import styles from "../styles/Categories.module.css";
+
 function CategoryForm({
   category,
   onSubmit,
@@ -80,7 +82,7 @@ function CategoryForm({
         <p className="category-error">{error}</p>
       )}
 
-      <div className="category-form-actions">
+      <div  className={styles.formActions}>
         <button
           type="button"
           onClick={onCancel}
