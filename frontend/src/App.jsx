@@ -5,14 +5,18 @@ import {
     Navigate,
 } from "react-router-dom";
 
+import { AuthProvider } from "./context/AuthContext";
+
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
 
+import ComingSoon from "./components/common/ComingSoon";
+
+import AppLayout from "./components/layout/AppLayout";
+
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
-
-import { AuthProvider } from "./context/AuthContext";
 
 function App() {
     return (
@@ -33,12 +37,53 @@ function App() {
                         />
                     </Route>
 
-                    {/* Protected routes */}
+                    {/* Protected application */}
                     <Route element={<ProtectedRoute />}>
-                        <Route
-                            path="/dashboard"
-                            element={<DashboardPage />}
-                        />
+
+                        <Route element={<AppLayout />}>
+
+                            <Route
+                                path="/dashboard"
+                                element={<DashboardPage />}
+                            />
+
+                            <Route
+                                path="/transactions"
+                                element={
+                                    <ComingSoon title="Transactions" />
+                                }
+                            />
+
+                            <Route
+                                path="/categories"
+                                element={
+                                    <ComingSoon title="Categories" />
+                                }
+                            />
+
+                            <Route
+                                path="/budgets"
+                                element={
+                                    <ComingSoon title="Budgets" />
+                                }
+                            />
+
+                            <Route
+                                path="/savings"
+                                element={
+                                    <ComingSoon title="Savings Goals" />
+                                }
+                            />
+
+                            <Route
+                                path="/profile"
+                                element={
+                                    <ComingSoon title="My Profile" />
+                                }
+                            />
+
+                        </Route>
+
                     </Route>
 
                     {/* Default route */}
@@ -47,7 +92,7 @@ function App() {
                         element={<Navigate to="/dashboard" replace />}
                     />
 
-                    {/* Unknown route */}
+                    {/* Unknown routes */}
                     <Route
                         path="*"
                         element={<Navigate to="/dashboard" replace />}

@@ -51,8 +51,8 @@ export function AuthProvider({ children }) {
     const logout = async () => {
         try {
             await authService.logout();
-            clearAccessToken();
         } finally {
+            clearAccessToken();
             setAccessToken(null);
             setUser(null);
         }

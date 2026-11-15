@@ -1,0 +1,23 @@
+.appLayout {
+    min-height: 100vh;
+}
+
+.mainArea {
+    min-height: 100vh;
+    margin-left: var(--sidebar-width);
+}
+
+.content {
+    padding: 32px;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+@media (max-width: 768px) {
+    .mainArea {
+        margin-left: 0;
+    }
+
+    .content {
+        padding: 20px 16px;
+    }
+}
