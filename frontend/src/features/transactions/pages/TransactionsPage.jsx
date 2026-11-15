@@ -175,11 +175,7 @@ function TransactionsPage() {
       setSelectedTransaction(null);
       await loadTransactions();
     } catch (error) {
-        showToast(
-            error.response?.data?.detail ||
-            "Failed to create transaction.",
-            "error"
-        );
+        showToast(error.message, "error");
     } finally {
       setSubmitting(false);
     }
@@ -213,12 +209,8 @@ function TransactionsPage() {
           "Unable to delete transaction."
       );
 
-      showToast(
-            error.response?.data?.detail ||
-            "Failed to create transaction.",
-            "error"
-        );
-        
+      showToast(err.message, "error");
+
     } finally {
       setDeleting(false);
     }

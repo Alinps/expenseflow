@@ -110,11 +110,7 @@ function SavingsPage() {
       setContributionGoal(null);
       await loadGoals();
     } catch (error) {
-        showToast(
-            error.response?.data?.detail ||
-            "Failed to add Contribution.",
-            "error"
-        );
+        showToast(error.message, "error");
     } finally {
       setSubmitting(false);
     }
@@ -140,11 +136,7 @@ function SavingsPage() {
           "Unable to load contribution history."
       );
 
-      showToast(
-            error.response?.data?.detail ||
-            "Unable to load contribution history.",
-            "error"
-        );
+      showToast(err.message, "error");
 
       setHistoryGoal(null);
     } finally {
@@ -172,11 +164,7 @@ function SavingsPage() {
         err.response?.data?.detail ||
           "Unable to delete savings goal."
       );
-      showToast(
-            error.response?.data?.detail ||
-            "Unable to delete savings goal.",
-            "error"
-        );
+      showToast(err.message, "error");
     } finally {
       setDeleting(false);
     }

@@ -89,11 +89,7 @@ function CategoriesPage() {
 
       await loadCategories();
     } catch (error) {
-        showToast(
-            error.response?.data?.detail ||
-            "Failed to create or update category.",
-            "error"
-        );
+        showToast(error.message, "error");
     } finally {
       setSubmitting(false);
     }
@@ -122,11 +118,7 @@ function CategoriesPage() {
           ? detail
           : "Unable to delete category. It may be associated with transactions."
       );
-      showToast(
-            err.response?.data?.detail ||
-            "Failed to create or update category.",
-            "error"
-        );
+     showToast(error.message, "error");
     } finally {
       setDeleting(false);
     }

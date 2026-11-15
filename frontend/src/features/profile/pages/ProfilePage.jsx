@@ -9,12 +9,15 @@ import AccountInformation from "../components/AccountInformation";
 
 import styles from "../styles/Profile.module.css";
 
+import { useToast } from "../../../hooks/useToast";
+
 function ProfilePage() {
     const { logout } = useAuth();
 
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { showToast } = useToast();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -30,6 +33,7 @@ function ProfilePage() {
                     err.response?.data?.detail ||
                     "Unable to load profile information."
                 );
+                showToast(err.message, "error");
             } finally {
                 setLoading(false);
             }

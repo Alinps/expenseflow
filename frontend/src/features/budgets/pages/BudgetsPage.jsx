@@ -72,13 +72,9 @@ function BudgetsPage() {
           ? response
           : response.items || []
       );
-    } catch {
+    } catch(error) {
       setError("Unable to load expense categories.");
-      showToast(
-            error.response?.data?.detail ||
-            "Unable to load expense categories.",
-            "error"
-        );
+      showToast(error.message, "error");
     }
   }, []);
 
@@ -126,11 +122,7 @@ function BudgetsPage() {
 
       await loadBudgets();
     } catch (error) {
-        showToast(
-            error.response?.data?.detail ||
-            "Failed to create or update Budget.",
-            "error"
-        );
+       showToast(error.message, "error");
     } finally {
       setSubmitting(false);
     }
@@ -152,17 +144,9 @@ function BudgetsPage() {
         );
       await loadBudgets();
     } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          "Unable to delete budget."
-      );
+      showToast(err.message, "error");
 
-       showToast(
-            err.response?.data?.detail ||
-            "Failed to delete Budget.",
-            "error"
-        );
-
+      showToast(err.message, "error");
     } finally {
       setDeleting(false);
     }
