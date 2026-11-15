@@ -47,3 +47,35 @@ img {
     margin: 0 auto;
     padding: var(--spacing-6);
 }
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.category-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-field label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.category-field input,
+.category-field select {
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font: inherit;
+}
+
+.category-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}

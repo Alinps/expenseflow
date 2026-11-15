@@ -11,6 +11,7 @@ import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import TransactionsPage from "./features/transactions/pages/TransactionsPage";
+import CategoriesPage from "./features/categories/pages/CategoriesPage";
 
 
 import ComingSoon from "./components/common/ComingSoon";
@@ -58,9 +59,7 @@ function App() {
 
                             <Route
                                 path="/categories"
-                                element={
-                                    <ComingSoon title="Categories" />
-                                }
+                                element={<CategoriesPage />}
                             />
 
                             <Route
