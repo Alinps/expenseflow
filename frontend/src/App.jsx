@@ -10,6 +10,8 @@ import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
+import TransactionsPage from "./features/transactions/pages/TransactionsPage";
+
 
 import ComingSoon from "./components/common/ComingSoon";
 
@@ -17,6 +19,8 @@ import AppLayout from "./components/layout/AppLayout";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
+
+
 
 function App() {
     return (
@@ -49,9 +53,7 @@ function App() {
 
                             <Route
                                 path="/transactions"
-                                element={
-                                    <ComingSoon title="Transactions" />
-                                }
+                                element={<TransactionsPage />}
                             />
 
                             <Route
@@ -81,6 +83,7 @@ function App() {
                                     <ComingSoon title="My Profile" />
                                 }
                             />
+                           
 
                         </Route>
 
