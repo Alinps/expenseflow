@@ -8,6 +8,7 @@ import SavingsGoalModal from "../components/SavingsGoalModal";
 import ContributionModal from "../components/ContributionModal";
 import ContributionHistory from "../components/ContributionHistory";
 import DeleteGoalDialog from "../components/DeleteGoalDialog";
+import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Savings.module.css";
 
@@ -29,6 +30,8 @@ function SavingsPage() {
 
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  const { showToast } = useToast();
 
   const loadGoals = useCallback(async () => {
     setLoading(true);
@@ -99,8 +102,19 @@ function SavingsPage() {
         data
       );
 
+      showToast(
+            "Contribution added successfully!",
+            "success"
+        );
+
       setContributionGoal(null);
       await loadGoals();
+    } catch (error) {
+        showToast(
+            error.response?.data?.detail ||
+            "Failed to add Contribution.",
+            "error"
+        );
     } finally {
       setSubmitting(false);
     }
@@ -126,6 +140,12 @@ function SavingsPage() {
           "Unable to load contribution history."
       );
 
+      showToast(
+            error.response?.data?.detail ||
+            "Unable to load contribution history.",
+            "error"
+        );
+
       setHistoryGoal(null);
     } finally {
       setHistoryLoading(false);
@@ -142,12 +162,21 @@ function SavingsPage() {
       await savingsService.deleteGoal(deleteTarget.id);
 
       setDeleteTarget(null);
+      showToast(
+            "Savings deleteded successfully!",
+            "success"
+        );
       await loadGoals();
     } catch (err) {
       setError(
         err.response?.data?.detail ||
           "Unable to delete savings goal."
       );
+      showToast(
+            error.response?.data?.detail ||
+            "Unable to delete savings goal.",
+            "error"
+        );
     } finally {
       setDeleting(false);
     }

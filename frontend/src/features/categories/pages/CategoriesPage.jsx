@@ -6,6 +6,7 @@ import categoryService from "../../../services/categoryService";
 import CategoryTable from "../components/CategoryTable";
 import CategoryModal from "../components/CategoryModal";
 import DeleteCategoryDialog from "../components/DeleteCategoryDialog";
+import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Categories.module.css";
 
@@ -22,6 +23,8 @@ function CategoriesPage() {
 
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  const { showToast } = useToast();
 
   const loadCategories = useCallback(async () => {
     setLoading(true);
@@ -69,14 +72,28 @@ function CategoriesPage() {
           selectedCategory.id,
           data
         );
+         showToast(
+            "Category updated successfully!",
+            "success"
+        );
       } else {
         await categoryService.createCategory(data);
+         showToast(
+            "Category created successfully!",
+            "success"
+        );
       }
 
       setModalOpen(false);
       setSelectedCategory(null);
 
       await loadCategories();
+    } catch (error) {
+        showToast(
+            error.response?.data?.detail ||
+            "Failed to create or update category.",
+            "error"
+        );
     } finally {
       setSubmitting(false);
     }
@@ -92,6 +109,10 @@ function CategoriesPage() {
       await categoryService.deleteCategory(deleteTarget.id);
 
       setDeleteTarget(null);
+      showToast(
+            "Category deleted successfully!",
+            "success"
+        );
       await loadCategories();
     } catch (err) {
       const detail = err.response?.data?.detail;
@@ -101,6 +122,11 @@ function CategoriesPage() {
           ? detail
           : "Unable to delete category. It may be associated with transactions."
       );
+      showToast(
+            err.response?.data?.detail ||
+            "Failed to create or update category.",
+            "error"
+        );
     } finally {
       setDeleting(false);
     }

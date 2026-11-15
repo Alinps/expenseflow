@@ -7,6 +7,8 @@ import BudgetCard from "../components/BudgetCard";
 import BudgetModal from "../components/BudgetModal";
 import DeleteBudgetDialog from "../components/DeleteBudgetDialog";
 
+import { useToast } from "../../../hooks/useToast";
+
 import styles from "../styles/Budgets.module.css";
 
 function BudgetsPage() {
@@ -28,6 +30,8 @@ function BudgetsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
+  const { showToast } = useToast();
+
   const loadBudgets = useCallback(async () => {
     setLoading(true);
     setError("");
@@ -48,6 +52,11 @@ function BudgetsPage() {
         err.response?.data?.detail ||
           "Unable to load budgets."
       );
+      showToast(
+            error.response?.data?.detail ||
+            "Unable to load budgets.",
+            "error"
+        );
     } finally {
       setLoading(false);
     }
@@ -65,6 +74,11 @@ function BudgetsPage() {
       );
     } catch {
       setError("Unable to load expense categories.");
+      showToast(
+            error.response?.data?.detail ||
+            "Unable to load expense categories.",
+            "error"
+        );
     }
   }, []);
 
@@ -95,14 +109,28 @@ function BudgetsPage() {
           selectedBudget.id,
           data
         );
+        showToast(
+            "Budget updated successfully!",
+            "success"
+        );
       } else {
         await budgetService.createBudget(data);
+        showToast(
+            "Budget created successfully!",
+            "success"
+        );
       }
 
       setModalOpen(false);
       setSelectedBudget(null);
 
       await loadBudgets();
+    } catch (error) {
+        showToast(
+            error.response?.data?.detail ||
+            "Failed to create or update Budget.",
+            "error"
+        );
     } finally {
       setSubmitting(false);
     }
@@ -118,12 +146,23 @@ function BudgetsPage() {
       await budgetService.deleteBudget(deleteTarget.id);
 
       setDeleteTarget(null);
+      showToast(
+            "Budget deleted successfully!",
+            "success"
+        );
       await loadBudgets();
     } catch (err) {
       setError(
         err.response?.data?.detail ||
           "Unable to delete budget."
       );
+
+       showToast(
+            err.response?.data?.detail ||
+            "Failed to delete Budget.",
+            "error"
+        );
+
     } finally {
       setDeleting(false);
     }

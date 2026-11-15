@@ -12,6 +12,7 @@ import RecentTransactions from "../components/RecentTransactions";
 import BudgetOverview from "../components/BudgetOverview";
 import SavingsOverview from "../components/SavingsOverview";
 
+
 import {
     formatCurrency,
     getCurrentMonthRange,
@@ -231,5 +232,8 @@ function DashboardPage() {
         </div>
     );
 }
+
+
+
 
 export default DashboardPage;

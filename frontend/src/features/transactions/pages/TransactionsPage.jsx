@@ -6,6 +6,7 @@ import TransactionFilters from "../components/TransactionFilters";
 import TransactionTable from "../components/TransactionTable";
 import TransactionModal from "../components/TransactionModal";
 import DeleteTransactionDialog from "../components/DeleteTransactionDialog";
+import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Transactions.module.css";
 
@@ -43,6 +44,8 @@ function TransactionsPage() {
 
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  const { showToast } = useToast();
 
   const loadCategories = useCallback(async () => {
     const response = await transactionService.getCategories();
@@ -162,11 +165,21 @@ function TransactionsPage() {
         );
       } else {
         await transactionService.createTransaction(data);
+        showToast(
+            "Transaction created successfully!",
+            "success"
+        );
       }
 
       setModalOpen(false);
       setSelectedTransaction(null);
       await loadTransactions();
+    } catch (error) {
+        showToast(
+            error.response?.data?.detail ||
+            "Failed to create transaction.",
+            "error"
+        );
     } finally {
       setSubmitting(false);
     }
@@ -184,6 +197,11 @@ function TransactionsPage() {
 
       setDeleteTarget(null);
 
+      showToast(
+            "Transaction deleted successfully!",
+            "success"
+        );
+
       if (transactions.length === 1 && page > 1) {
         setPage((previous) => previous - 1);
       } else {
@@ -194,6 +212,13 @@ function TransactionsPage() {
         err.response?.data?.detail ||
           "Unable to delete transaction."
       );
+
+      showToast(
+            error.response?.data?.detail ||
+            "Failed to create transaction.",
+            "error"
+        );
+        
     } finally {
       setDeleting(false);
     }
