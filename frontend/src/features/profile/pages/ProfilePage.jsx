@@ -11,6 +11,10 @@ import styles from "../styles/Profile.module.css";
 
 import { useToast } from "../../../hooks/useToast";
 
+
+
+
+
 function ProfilePage() {
     const { logout } = useAuth();
 
@@ -59,6 +63,8 @@ function ProfilePage() {
     }
 
     if (!profile) return null;
+
+    
 
     return (
         <div className={styles.container}>

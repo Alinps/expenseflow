@@ -1,5 +1,6 @@
 import styles from "../styles/Profile.module.css";
 
+
 function ProfileCard({ profile }) {
     const displayName =
         profile.full_name ||
@@ -14,6 +15,8 @@ function ProfileCard({ profile }) {
         .join("")
         .slice(0, 2)
         .toUpperCase();
+
+        
 
     return (
         <div className={styles.profileCard}>
