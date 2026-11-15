@@ -17,11 +17,11 @@ let accessToken = null;
 // Prevent multiple simultaneous refresh requests.
 let refreshPromise = null;
 
-export function setApiAccessToken(token) {
+export function setAccessToken(token) {
     accessToken = token;
 }
 
-export function clearApiAccessToken() {
+export function clearAccessToken() {
     accessToken = null;
 }
 
@@ -53,7 +53,7 @@ async function refreshAccessToken() {
                     throw new Error("Access token missing from refresh response.");
                 }
 
-                setApiAccessToken(token);
+                setAccessToken(token);
 
                 return token;
             })
@@ -101,7 +101,7 @@ api.interceptors.response.use(
 
                 return api(originalRequest);
             } catch (refreshError) {
-                clearApiAccessToken();
+                clearAccessToken();
 
                 return Promise.reject(
                     normalizeApiError({
