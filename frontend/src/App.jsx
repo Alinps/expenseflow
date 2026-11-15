@@ -12,6 +12,7 @@ import RegisterPage from "./features/auth/pages/RegisterPage";
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import TransactionsPage from "./features/transactions/pages/TransactionsPage";
 import CategoriesPage from "./features/categories/pages/CategoriesPage";
+import BudgetsPage from "./features/budgets/pages/BudgetsPage";
 
 
 import ComingSoon from "./components/common/ComingSoon";
@@ -64,9 +65,7 @@ function App() {
 
                             <Route
                                 path="/budgets"
-                                element={
-                                    <ComingSoon title="Budgets" />
-                                }
+                                element={<BudgetsPage />}
                             />
 
                             <Route
