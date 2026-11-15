@@ -14,6 +14,7 @@ import TransactionsPage from "./features/transactions/pages/TransactionsPage";
 import CategoriesPage from "./features/categories/pages/CategoriesPage";
 import BudgetsPage from "./features/budgets/pages/BudgetsPage";
 import SavingsPage from "./features/savings/pages/SavingsPage";
+import ProfilePage from "./features/profile/pages/ProfilePage";
 
 
 import ComingSoon from "./components/common/ComingSoon";
@@ -76,9 +77,7 @@ function App() {
 
                             <Route
                                 path="/profile"
-                                element={
-                                    <ComingSoon title="My Profile" />
-                                }
+                                element={<ProfilePage />}
                             />
                            
 
