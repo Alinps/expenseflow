@@ -1,0 +1,121 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.dashboardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.dashboardHeader h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+.dashboardHeader p {
+    margin-top: 6px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.dateBadge {
+    padding: 10px 16px;
+
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+
+    border-radius: var(--radius-md);
+
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.chartGrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.sectionGrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 20px;
+}
+
+.balanceFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    background-color: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.balanceFooter span {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.balanceFooter strong {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+}
+
+.stateMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    min-height: 300px;
+
+    color: var(--color-text-secondary);
+}
+
+.stateMessage button {
+    padding: 10px 20px;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-md);
+}
+
+@media (max-width: 1100px) {
+    .sectionGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .chartGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboardHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .sectionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .balanceFooter {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
