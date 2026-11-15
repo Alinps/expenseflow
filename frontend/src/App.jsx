@@ -13,6 +13,7 @@ import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import TransactionsPage from "./features/transactions/pages/TransactionsPage";
 import CategoriesPage from "./features/categories/pages/CategoriesPage";
 import BudgetsPage from "./features/budgets/pages/BudgetsPage";
+import SavingsPage from "./features/savings/pages/SavingsPage";
 
 
 import ComingSoon from "./components/common/ComingSoon";
@@ -70,9 +71,7 @@ function App() {
 
                             <Route
                                 path="/savings"
-                                element={
-                                    <ComingSoon title="Savings Goals" />
-                                }
+                                element={<SavingsPage />}
                             />
 
                             <Route
