@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../../context/AuthContext";
 
@@ -13,6 +14,13 @@ import BudgetOverview from "../components/BudgetOverview";
 import SavingsOverview from "../components/SavingsOverview";
 
 import DashboardSkeleton from "../../../components/common/LoadingStates/DashboardSkeleton";
+
+import EmptyState from "../../../components/common/EmptyState/EmptyState";
+import ErrorState from "../../../components/common/ErrorState/ErrorState";
+
+import { Receipt } from "lucide-react";
+import { Wallet } from "lucide-react";
+import { PiggyBank } from "lucide-react";
 
 
 import {
@@ -69,6 +77,8 @@ function DashboardPage() {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     const today = new Date();
 
@@ -205,17 +215,43 @@ function DashboardPage() {
             </div>
 
             <div className={styles.sectionGrid}>
-                <RecentTransactions
-                    transactions={transactions}
-                />
+            {transactions.length === 0 ? (
+                    <EmptyState
+                        icon={Receipt}
+                        title="No recent transactions"
+                        description="Your latest transactions will appear here."
+                        actionLabel="Add Transaction"
+                        onAction={() => navigate("/transactions")}
+                    />
+                ) : (
+                    <RecentTransactions
+                        transactions={transactions}
+                    />
+                )}
 
-                <BudgetOverview
-                    budgets={budgets}
-                />
+                {budgets.length === 0 ? (
+                    <EmptyState
+                        icon={Wallet}
+                        title="No budgets created"
+                        description="Create a budget to monitor your monthly expenses."
+                        actionLabel="Create Budget"
+                        onAction={() => navigate("/budgets")}
+                    />
+                ) : (
+                    <BudgetOverview budgets={budgets} />
+                )}
 
-                <SavingsOverview
-                    goals={goals}
-                />
+          {goals.length === 0 ? (
+    <EmptyState
+        icon={PiggyBank}
+        title="No savings goals"
+        description="Create a savings goal and track your progress."
+        actionLabel="Create Goal"
+        onAction={() => navigate("/savings")}
+    />
+) : (
+    <SavingsOverview goals={goals} />
+)}
             </div>
 
             <div className={styles.balanceFooter}>

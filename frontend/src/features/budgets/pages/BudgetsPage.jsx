@@ -13,6 +13,11 @@ import { useToast } from "../../../hooks/useToast";
 
 import styles from "../styles/Budgets.module.css";
 
+import EmptyState from "../../../components/common/EmptyState/EmptyState";
+import ErrorState from "../../../components/common/ErrorState/ErrorState";
+
+import { Wallet } from "lucide-react";
+
 function BudgetsPage() {
   const today = new Date();
 
@@ -288,7 +293,21 @@ function BudgetsPage() {
 
       {loading ? (
          <CardGridSkeleton count={3} />
-      ) : budgets.length === 0 ? (
+      ) : error ? (
+    <ErrorState
+        title="Unable to load budgets"
+        message={error}
+        onRetry={fetchBudgets}
+    />
+) : budgets.length === 0 ? (
+    <EmptyState
+        icon={Wallet}
+        title="No budgets for this month"
+        description="Create a monthly budget to monitor your spending and stay within your limits."
+        actionLabel="Create Budget"
+        onAction={() => setModalOpen(true)}
+    />
+) : budgets.length === 0 ? (
         <div className={styles.empty}>
           <h3>No budgets for this month</h3>
           <p>Create a budget to start tracking your spending.</p>

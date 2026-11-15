@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 import categoryService from "../../../services/categoryService";
 
 import CategoryTable from "../components/CategoryTable";
@@ -12,6 +14,11 @@ import styles from "../styles/Categories.module.css";
 
 import TableSkeleton from "../../../components/common/LoadingStates/TableSkeleton";
 
+import EmptyState from "../../../components/common/EmptyState/EmptyState";
+import ErrorState from "../../../components/common/ErrorState/ErrorState";
+
+import { Tags } from "lucide-react";
+
 function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [filterType, setFilterType] = useState("");
@@ -22,6 +29,8 @@ function CategoriesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
+
+  const navigate = useNavigate();
 
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -196,7 +205,21 @@ function CategoriesPage() {
 
       {loading ? (
         <TableSkeleton rows={5} columns={4} />
-      ) : (
+      ) : error ? (
+    <ErrorState
+        title="Unable to load categories"
+        message={error}
+        onRetry={fetchCategories}
+    />
+) : categories.length === 0 ? (
+    <EmptyState
+        icon={Tags}
+        title="No categories found"
+        description="Create categories to organize your income and expenses."
+        actionLabel="Add Category"
+        onAction={() => setModalOpen(true)}
+    />
+): (
         <CategoryTable
           categories={categories}
           onEdit={openEditModal}

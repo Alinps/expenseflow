@@ -10,6 +10,11 @@ import { useToast } from "../../../hooks/useToast";
 
 import TableSkeleton from "../../../components/common/LoadingStates/TableSkeleton";
 
+import EmptyState from "../../../components/common/EmptyState/EmptyState";
+import ErrorState from "../../../components/common/ErrorState/ErrorState";
+
+import { Receipt } from "lucide-react";
+
 import styles from "../styles/Transactions.module.css";
 
 const PAGE_SIZE = 10;
@@ -260,7 +265,21 @@ function TransactionsPage() {
       {loading ? (
        <TableSkeleton rows={5} columns={6} />
         
-      ) : (
+      ) :  error ? (
+    <ErrorState
+        title="Unable to load transactions"
+        message={error}
+        onRetry={fetchTransactions}
+    />
+) : transactions.length === 0 ? (
+    <EmptyState
+        icon={Receipt}
+        title="No transactions yet"
+        description="Start tracking your income and expenses by adding your first transaction."
+        actionLabel="Add Transaction"
+        onAction={() => setModalOpen(true)}
+    />
+) : (
         <>
           <TransactionTable
             transactions={filteredTransactions}

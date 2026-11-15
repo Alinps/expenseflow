@@ -14,6 +14,11 @@ import styles from "../styles/Savings.module.css";
 
 import CardGridSkeleton from "../../../components/common/LoadingStates/CardGridSkeleton";
 
+import EmptyState from "../../../components/common/EmptyState/EmptyState";
+import ErrorState from "../../../components/common/ErrorState/ErrorState";
+
+import { PiggyBank } from "lucide-react";
+
 function SavingsPage() {
   const [goals, setGoals] = useState([]);
 
@@ -261,7 +266,21 @@ function SavingsPage() {
 
       {loading ? (
          <CardGridSkeleton count={3} />
-      ) : goals.length === 0 ? (
+      ) : error ? (
+    <ErrorState
+        title="Unable to load savings goals"
+        message={error}
+        onRetry={fetchGoals}
+    />
+) : goals.length === 0 ? (
+    <EmptyState
+        icon={PiggyBank}
+        title="No savings goals yet"
+        description="Set a savings target and start building towards your financial goals."
+        actionLabel="Create Savings Goal"
+        onAction={openCreateModal}
+    />
+) : goals.length === 0 ? (
         <div className={styles.empty}>
           <h3>No savings goals yet</h3>
           <p>Create your first goal to start saving.</p>
