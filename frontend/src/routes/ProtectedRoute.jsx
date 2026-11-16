@@ -2,6 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
+import AppLoader from "../components/common/AppLoader";
+
 function ProtectedRoute() {
     const {
         isAuthenticated,
@@ -9,7 +11,7 @@ function ProtectedRoute() {
     } = useAuth();
 
     if (loading) {
-        return <p>Loading ExpenseFlow...</p>;
+          return <AppLoader />;
     }
 
     if (!isAuthenticated) {
